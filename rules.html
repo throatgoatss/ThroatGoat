@@ -66,15 +66,15 @@
 
         /* 3. MAIN LAYOUT */
         header { padding: 40px 15px; text-align: center; }
-        .main-title { font-family: 'Orbitron'; font-size: 2.2rem; color: white; letter-spacing: 4px; text-shadow: 0 0 15px var(--neon-green); }
+        .main-title { font-family: 'Orbitron'; font-size: 2rem; color: white; letter-spacing: 2px; text-shadow: 0 0 15px var(--neon-green); }
 
-        /* RULES CONTAINER STYLE */
+        /* RULES CONTAINER STYLE - MOBILE OPTIMIZED */
         .rules-container {
-            width: 90%;
+            width: 85%;
             max-width: 500px;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 30px;
+            padding: 20px;
             border: 1px solid #333;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -83,8 +83,14 @@
         .rules-list {
             list-style: none;
             padding: 0;
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1.1rem; /* Slightly smaller for mobile */
+            line-height: 1.6;
+        }
+
+        @media (min-width: 600px) {
+            .main-title { font-size: 2.2rem; letter-spacing: 4px; }
+            .rules-container { padding: 30px; width: 90%; }
+            .rules-list { font-size: 1.2rem; line-height: 1.8; }
         }
 
         footer { margin-top: 60px; padding: 40px 15px; background: #000; font-size: 0.9rem; color: #555; text-align: center; }
@@ -123,7 +129,7 @@
             <li style="margin-bottom:15px;">⚡ <strong style="color:var(--neon-green)">GOAL:</strong> Drink 500ml water without stopping.</li>
             <li style="margin-bottom:15px;">⚡ <strong style="color:var(--neon-green)">GEAR:</strong> Participants have to buy/bring their own 500ml Water Bottle.</li>
             
-            <li style="margin-bottom:15px;">⚡ <strong style="color:var(--neon-green)">Unspoken Rules:</strong> 
+            <li style="margin-bottom:15px;">⚡ <strong style="color:var(--neon-green)">Unspoken Rules:</strong> </li>
             
             <li>⚡ <strong>1:</strong> You Do Not Talk About Throat Club.</li>
             <li>⚡ <strong>2:</strong> You DO NOT TALK ABOUT THROAT CLUB.</li>
