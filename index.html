@@ -62,7 +62,7 @@
             100% { transform: translate(1px, -1px); }
         }
 
-        /* 2. MENU - UPDATED FOR PC VISIBILITY */
+        /* 2. MENU */
         #menu-toggle {
             position: fixed;
             top: 20px; right: 20px; z-index: 5000;
@@ -92,11 +92,10 @@
         }
         .gdrive-btn:hover { background: var(--neon-green); color: black; box-shadow: 0 0 20px var(--neon-green); }
 
-        /* 4. LEADERBOARD INTERACTIVITY */
+        /* 4. LEADERBOARD FIXES */
         .search-box { margin-bottom: 25px; text-align: center; }
         #searchBar { background: #1a1a1a; border: 1px solid #333; padding: 14px; color: white; width: 85%; max-width: 320px; border-radius: 4px; outline: none; transition: 0.3s; }
-        #searchBar:focus { border-color: var(--neon-green); box-shadow: 0 0 10px rgba(57, 255, 20, 0.2); }
-
+        
         .leaderboard-table { width: 95%; margin: 0 auto; border-collapse: separate; border-spacing: 0 12px; }
         
         tr { 
@@ -109,41 +108,42 @@
             transform: scale(1.03); 
             background: #1a1a1a;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            z-index: 10;
         }
 
-        tr:active { transform: scale(0.98); }
+        /* THE FIX: Aligning Picture and Name Text */
+        .player-cell {
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
 
-        td { padding: 15px 10px; font-size: 1.1rem; border: 1px solid transparent; }
+        .player-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        /* TREND INDICATORS */
+        .participant-pic { 
+            width: 50px; height: 50px; border-radius: 50%; 
+            margin-right: 15px; border: 2px solid #333; object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .rank-tag { font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 900; display: block; margin-top: 2px; letter-spacing: 1px; }
+
+        td { padding: 15px 10px; font-size: 1.1rem; }
+
         .trend-icon { font-size: 0.8rem; margin-left: 5px; font-weight: bold; }
         .trend-up { color: var(--trend-up); text-shadow: 0 0 5px var(--trend-up); }
         .trend-down { color: var(--trend-down); text-shadow: 0 0 5px var(--trend-down); }
         .trend-new { color: var(--trend-new); text-shadow: 0 0 5px var(--trend-new); }
 
-        /* RANK TAGS */
-        .rank-tag { font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 900; display: block; margin-top: 2px; letter-spacing: 1px; }
-
-        /* RANK GLOW EFFECTS */
-        .rank-1 { border: 1px solid var(--gold) !important; box-shadow: 0 0 15px rgba(255, 204, 0, 0.2); }
-        .rank-1 td { color: var(--gold); font-weight: bold; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
-        
+        .rank-1 { border: 1px solid var(--gold) !important; }
+        .rank-1 td { color: var(--gold); }
         .rank-2 { border: 1px solid var(--platinum) !important; }
-        .rank-2 td { color: var(--platinum); text-shadow: 0 0 8px rgba(0, 242, 255, 0.4); }
-
         .rank-3 { border: 1px solid var(--bronze) !important; }
-        .rank-3 td { color: var(--bronze); text-shadow: 0 0 8px rgba(255, 102, 0, 0.4); }
 
-        .participant-pic { 
-            width: 45px; height: 45px; border-radius: 50%; 
-            margin-right: 12px; vertical-align: middle; 
-            border: 2px solid #333; object-fit: cover;
-            transition: 0.3s;
-        }
-        tr:hover .participant-pic { border-color: var(--neon-green); transform: rotate(5deg); }
-
-        /* 5. HISTORY MODAL */
+        /* MODAL */
         #history-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 7000; justify-content: center; align-items: center;
@@ -151,14 +151,12 @@
         .modal-box {
             background: #111; border: 2px solid var(--neon-green); padding: 25px;
             width: 85%; max-width: 400px; border-radius: 10px; text-align: center;
-            box-shadow: 0 0 20px var(--neon-green);
         }
         .history-list { margin: 20px 0; max-height: 250px; overflow-y: auto; text-align: left; }
         .history-entry { padding: 10px; border-bottom: 1px solid #222; font-family: 'Orbitron'; color: var(--platinum); display: flex; justify-content: space-between; }
         .close-modal-btn { background: var(--neon-green); color: black; border: none; padding: 10px 20px; font-family: 'Orbitron'; cursor: pointer; width: 100%; }
         
-        .clickable-name { cursor: pointer; text-decoration: underline; text-decoration-color: #444; transition: 0.2s; }
-        .clickable-name:hover { color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); }
+        .clickable-name { cursor: pointer; text-decoration: underline; text-decoration-color: #444; }
 
         footer { margin-top: 60px; padding: 40px 15px; background: #000; font-size: 0.9rem; color: #555; text-align: center; }
         .founder-name { color: var(--neon-green); font-weight: bold; }
@@ -166,8 +164,6 @@
     </style>
 </head>
 <body>
-
-    <audio id="goat-sound" src="https://docs.google.com/uc?export=download&id=1tnolLZ5oyo77awgDkrRQr3QBJ25g85mJ" preload="auto"></audio>
 
     <div id="intro-overlay">
         <div class="glitch">THROATGOAT</div>
@@ -221,9 +217,9 @@
         <table class="leaderboard-table">
             <thead>
                 <tr>
-                    <th style="width: 20%; text-align: center; color:#666;">Tier</th>
-                    <th style="width: 50%; color:#666; text-align:left;">ThroatGoat's</th>
-                    <th style="width: 30%; text-align: right; padding-right: 20px; color:#666;">Time</th>
+                    <th style="width: 15%; text-align: center; color:#666;">Tier</th>
+                    <th style="width: 60%; color:#666; text-align:left;">ThroatGoat's</th>
+                    <th style="width: 25%; text-align: right; padding-right: 20px; color:#666;">Time</th>
                 </tr>
             </thead>
             <tbody id="leaderboard-body">
@@ -329,9 +325,13 @@
                     body.innerHTML += `<tr class="${rowClass}" onclick="openHistory('${p.name.replace(/'/g, "\\'")}')">
                         <td style="text-align:center; font-weight:bold;">#${rankNum}</td>
                         <td>
-                            <img src="${imgUrl}" class="participant-pic"> 
-                            <span class="clickable-name">${p.name}</span>${trendHtml}
-                            <span class="rank-tag" style="color:${rankInfo.color}">${rankInfo.name}</span>
+                            <div class="player-cell">
+                                <img src="${imgUrl}" class="participant-pic"> 
+                                <div class="player-info">
+                                    <span><span class="clickable-name">${p.name}</span>${trendHtml}</span>
+                                    <span class="rank-tag" style="color:${rankInfo.color}">${rankInfo.name}</span>
+                                </div>
+                            </div>
                         </td>
                         <td style="text-align:right; padding-right:20px; font-family:'Orbitron'">${p.score.toFixed(2)}s</td>
                     </tr>`;
