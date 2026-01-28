@@ -77,6 +77,23 @@
         tr { background: var(--card-bg); transition: 0.3s; }
         td { padding: 15px 10px; font-size: 1.1rem; }
 
+/* Add this inside your <style> block */
+#leaderboard-body tr {
+    transition: all 0.3s ease;
+}
+
+#leaderboard-body tr:hover {
+    background: #1a1a1a !important;
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    cursor: crosshair;
+}
+
+/* Make the winner pulse even harder on hover */
+#leaderboard-body tr.rank-1:hover {
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
+}
+
         /* GOAT BUTTON STYLE */
         .goat-action-btn {
             background: var(--neon-green);
@@ -125,6 +142,9 @@
 
     <header>
         <h1 class="main-title">THROATGOAT</h1>
+        <div id="stats-bar" style="text-align:center; font-family:'Orbitron'; color:var(--platinum); margin-top:10px; font-size:0.9rem; letter-spacing:1px;">
+    TOTAL WATER ANNIHILATED: <span id="total-volume" style="color:var(--neon-green)">0</span>ML
+</div>
     </header>
 
     <div class="rules-container">
@@ -222,6 +242,26 @@
 
                 participants.sort((a, b) => a.score - b.score);
 
+// Calculate total volume (500ml per participant)
+const totalVolume = participants.length * 500;
+const volumeDisplay = document.getElementById('total-volume');
+
+// Animated counter effect
+let start = 0;
+const duration = 2000; // 2 seconds to count up
+const increment = totalVolume / (duration / 16);
+
+const updateCounter = () => {
+    start += increment;
+    if (start < totalVolume) {
+        volumeDisplay.innerText = Math.floor(start).toLocaleString();
+        requestAnimationFrame(updateCounter);
+    } else {
+        volumeDisplay.innerText = totalVolume.toLocaleString();
+    }
+};
+updateCounter();
+
                 const body = document.getElementById('leaderboard-body');
                 body.innerHTML = '';
 
@@ -234,10 +274,10 @@
                     const imgUrl = p.imageId ? `https://drive.google.com/thumbnail?id=${p.imageId}&sz=s100` : 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
 
                     body.innerHTML += `<tr class="${rowClass}">
-                        <td style="text-align:center; font-weight:bold;">#${rank}</td>
-                        <td>${goatBtn}<img src="${imgUrl}" class="participant-pic"> ${p.name}</td>
-                        <td style="text-align:right; padding-right:20px; font-family:'Orbitron'">${p.score.toFixed(2)}s</td>
-                    </tr>`;
+    <td style="text-align:center; font-weight:bold;">#${rank}</td>
+    <td>${goatBtn}<img src="${imgUrl}" class="participant-pic" loading="lazy"> ${p.name}</td>
+    <td style="text-align:right; padding-right:20px; font-family:'Orbitron'">${p.score.toFixed(2)}s</td>
+</tr>`;
                 });
             } catch (e) { console.error("Sync Error", e); }
         }
