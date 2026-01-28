@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RANKS | THROATGOAT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: #111;
+            --neon-green: #39ff14;
+            --platinum: #00f2ff;
+            --text: #e0e0e0;
+            
+            /* Rank Colors matching your logic */
+            --rank-divine: #bf00ff;
+            --rank-phantom: #ffcc00;
+            --rank-astral: #00f2ff;
+            --rank-void: #0044ff;
+            --rank-glitch: #ff00ff;
+            --rank-lead: #ff6600;
+            --rank-unit: #39ff14;
+            --rank-recruit: #888888;
+            --rank-sip: #8b4513;
+            --rank-waster: #ff0000;
+        }
+
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Rajdhani', sans-serif; 
+            margin: 0; 
+            padding-bottom: 50px;
+        }
+
+        header { padding: 40px 15px; text-align: center; }
+        .main-title { font-family: 'Orbitron'; font-size: 2rem; color: white; letter-spacing: 4px; text-shadow: 0 0 15px var(--neon-green); }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: var(--neon-green);
+            text-decoration: none;
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            background: rgba(0,0,0,0.8);
+            z-index: 100;
+        }
+
+        .ranks-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rank-card {
+            background: var(--card-bg);
+            border-left: 5px solid transparent;
+            padding: 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rank-card:hover {
+            transform: translateX(10px);
+            background: #1a1a1a;
+        }
+
+        .rank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .rank-name {
+            font-family: 'Orbitron';
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .rank-time {
+            font-family: 'Orbitron';
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .rank-desc {
+            font-size: 1rem;
+            line-height: 1.4;
+            color: #aaa;
+        }
+
+        /* Specific Rank Styles */
+        .divine { border-color: var(--rank-divine); box-shadow: inset 0 0 20px rgba(191, 0, 255, 0.1); }
+        .phantom { border-color: var(--rank-phantom); }
+        .astral { border-color: var(--rank-astral); }
+        .void { border-color: var(--rank-void); }
+        .glitch { border-color: var(--rank-glitch); }
+        .lead { border-color: var(--rank-lead); }
+        .unit { border-color: var(--rank-unit); }
+        .recruit { border-color: var(--rank-recruit); }
+        .sip { border-color: var(--rank-sip); }
+        .waster { border-color: var(--rank-waster); }
+
+        footer { margin-top: 60px; text-align: center; font-size: 0.8rem; color: #444; font-family: 'Orbitron'; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">< BACK TO LEADERBOARD</a>
+
+    <header>
+        <h1 class="main-title">RANK HIERARCHY</h1>
+        <p style="color: var(--platinum); font-family: 'Orbitron'; font-size: 0.7rem;">WHERE DO YOU STAND IN THE FOOD CHAIN?</p>
+    </header>
+
+    <div class="ranks-container">
+        
+        <div class="rank-card divine">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-divine)">DIVINE GOAT</span>
+                <span class="rank-time">< 3.5s</span>
+            </div>
+            <div class="rank-desc">Physics no longer apply. You don't drink water; you delete it from reality. Truly the GOAT of goats.</div>
+        </div>
+
+        <div class="rank-card phantom">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-phantom)">ANGLE GLUPPER</span>
+                <span class="rank-time">< 4.5s</span>
+            </div>
+            <div class="rank-desc">Celestial speed. Your throat has its own gravitational pull. A nightmare for any 500ml bottle.</div>
+        </div>
+
+        <div class="rank-card astral">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-astral)">ELITE PHANTOM</span>
+                <span class="rank-time">< 5.5s</span>
+            </div>
+            <div class="rank-desc">Top-tier efficiency. You move so fast you're barely visible on the replay. A master of the chug.</div>
+        </div>
+
+        <div class="rank-card void">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-void)">ASTRAL CHUGGER</span>
+                <span class="rank-time">< 6.5s</span>
+            </div>
+            <div class="rank-desc">You've transcended human limits. Your flow rate is reaching industrial levels.</div>
+        </div>
+
+        <div class="rank-card glitch">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-glitch)">VOID THROAT</span>
+                <span class="rank-time">< 7.5s</span>
+            </div>
+            <div class="rank-desc">The water enters a vacuum. There is no swallowing, only an endless void.</div>
+        </div>
+
+        <div class="rank-card lead">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-lead)">GLITCH GULPER</span>
+                <span class="rank-time">< 8.5s</span>
+            </div>
+            <div class="rank-desc">Your technique is starting to break the system. Fast, messy, and intimidating.</div>
+        </div>
+
+        <div class="rank-card unit">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-unit)">LEAD PIPE</span>
+                <span class="rank-time">< 10.0s</span>
+            </div>
+            <div class="rank-desc">Consistency is key. Like a lead pipe, you just let the water fall through. Solid mid-tier.</div>
+        </div>
+
+        <div class="rank-card recruit">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-recruit)">HYDRATION UNIT</span>
+                <span class="rank-time">< 12.0s</span>
+            </div>
+            <div class="rank-desc">You are hydrated, but you lack the killer instinct. You're just a standard participant... for now.</div>
+        </div>
+
+        <div class="rank-card sip">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-sip)">SIPLORD</span>
+                <span class="rank-time">< 15.0s</span>
+            </div>
+            <div class="rank-desc">Taking your time? This isn't a tea party. You're barely keeping up with the pace.</div>
+        </div>
+
+        <div class="rank-card waster">
+            <div class="rank-header">
+                <span class="rank-name" style="color: var(--rank-waster)">WATER WASTER</span>
+                <span class="rank-time">15.0s +</span>
+            </div>
+            <div class="rank-desc">Are you even trying? The bottle is winning. You're wasting precious liquid and time.</div>
+        </div>
+
+    </div>
+
+    <footer>
+        THROATGOAT OFFICIAL RANKING SYSTEM v2.0
+    </footer>
+
+</body>
+</html>
