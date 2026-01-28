@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>THROATGOAT | The Gauntlet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: #111;
+            --neon-green: #39ff14;
+            --gold: #ffcc00;
+            --platinum: #00f2ff;
+            --bronze: #ff6600;
+            --text: #e0e0e0;
+        }
+
+        body { background-color: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; margin: 0; overflow-x: hidden; width: 100%; }
+
+        /* 1. INTRO */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: 0.8s ease-out;
+        }
+
+        .glitch {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            text-shadow: 2px 0 0 red, -2px -2px 0 green, 0 2px 0 blue;
+            animation: glitch 200ms infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(2px, -2px); text-shadow: 2px 0 0 red, -2px -2px 0 green, 0 2px 0 blue; }
+            50% { transform: translate(-2px, 2px); text-shadow: -2px 0 0 red, 2px 2px 0 green, -2px -2px 0 blue; }
+            100% { transform: translate(1px, -1px); text-shadow: 2px 2px 0 red, -2px 2px 0 green, 2px -2px 0 blue; }
+        }
+
+        /* 2. MAIN LAYOUT */
+        header { padding: 40px 15px; text-align: center; }
+        .main-title { font-family: 'Orbitron'; font-size: 2.2rem; color: white; letter-spacing: 4px; text-shadow: 0 0 15px var(--neon-green); }
+
+        .rules-container { width: 90%; max-width: 700px; margin: 0 auto 30px; padding: 20px; background: var(--card-bg); border-left: 4px solid var(--neon-green); box-sizing: border-box; }
+        .rules-container h2 { color: var(--neon-green); font-size: 1.4rem; text-transform: uppercase; margin: 0 0 10px 0; }
+
+        .gdrive-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            padding: 12px 25px;
+            text-decoration: none;
+            font-family: 'Orbitron';
+            font-size: 0.85rem;
+            margin-bottom: 30px;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            transition: 0.3s;
+        }
+
+        /* 3. LEADERBOARD */
+        .search-box { margin-bottom: 25px; text-align: center; }
+        #searchBar { background: #1a1a1a; border: 1px solid #333; padding: 14px; color: white; width: 85%; max-width: 320px; outline: none; border-radius: 4px; font-family: 'Rajdhani'; }
+
+        .leaderboard-table { width: 95%; margin: 0 auto; border-collapse: separate; border-spacing: 0 10px; }
+        th { font-size: 0.8rem; color: #666; text-transform: uppercase; padding: 10px; text-align: left; }
+        tr { background: var(--card-bg); transition: 0.3s; }
+        td { padding: 15px 10px; font-size: 1.1rem; }
+
+        /* GOAT BUTTON STYLE */
+        .goat-action-btn {
+            background: var(--neon-green);
+            color: black;
+            border: none;
+            padding: 4px 8px;
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+            font-weight: 900;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 3px;
+            vertical-align: middle;
+            box-shadow: 0 0 8px var(--neon-green);
+        }
+
+        /* Ranks */
+        .rank-1 { border: 1px solid var(--gold); animation: goldPulse 2s infinite; }
+        .rank-1 td { color: var(--gold); font-weight: bold; }
+        .rank-2 { border: 1px solid var(--platinum); }
+        .rank-2 td { color: var(--platinum); }
+        .rank-3 { border: 1px solid var(--bronze); }
+        .rank-3 td { color: var(--bronze); }
+
+        @keyframes goldPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.5); }
+        }
+
+        .participant-pic { width: 45px; height: 45px; border-radius: 50%; margin-right: 12px; vertical-align: middle; border: 2px solid #333; object-fit: cover; }
+
+        footer { margin-top: 60px; padding: 40px 15px; background: #000; font-size: 0.9rem; color: #555; text-align: center; line-height: 1.8; }
+        .founder-name { color: var(--neon-green); font-weight: bold; }
+        .email { color: var(--platinum); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <audio id="glitch-sound" src="https://limewire.com/d/ZlWTL#J8K55HfXdF" preload="auto"></audio>
+    
+    <audio id="goat-sound" src="https://docs.google.com/uc?export=download&id=1tnolLZ5oyo77awgDkrRQr3QBJ25g85mJ" preload="auto"></audio>
+
+    <div id="intro-overlay">
+        <div class="glitch" id="glitch-text">THROATGOAT</div>
+    </div>
+
+    <header>
+        <h1 class="main-title">THROATGOAT</h1>
+    </header>
+
+    <div class="rules-container">
+        <h2>Rules</h2>
+        <ul style="list-style: none; padding: 0; line-height: 1.8;">
+            <li>⚡ <strong>GOAL:</strong> Drink 500ml water without stopping.</li>
+            <li>⚡ <strong>STRICT:</strong> Maintain flow. No pauses allowed.</li>
+            <li>⚡ <strong>GEAR:</strong> Participants must supply their own ₹10 bottle.</li>
+        </ul>
+    </div>
+
+    <center>
+        <a href="https://drive.google.com/drive/folders/1TEQRRxbUsjAr4I2SHKRg4ikjUjYMasLm" target="_blank" class="gdrive-btn">
+           <h2 style="margin:5px 0">Goats breaking Throats Videos</h2> 
+           <h6 style="margin:0">click here</h6>
+        </a>
+    </center>
+
+    <div class="search-box">
+        <input type="text" id="searchBar" placeholder="Search Goat..." onkeyup="filterTable()">
+    </div>
+
+    <div class="table-wrapper">
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%; text-align: center;">Tier</th>
+                    <th style="width: 50%;">ThroatGoat's</th>
+                    <th style="width: 30%; text-align: right; padding-right: 20px;">Time</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body"></tbody>
+        </table>
+    </div>
+
+    <footer>
+        Founders: <span class="founder-name">SAHIL K.</span> & <span class="founder-name">SMAYAN B.</span><br>
+        Contact: <a href="mailto:throatgoatcompetition@gmail.com" class="email">throatgoatcompetition@gmail.com</a>
+    </footer>
+
+    <script>
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS9FTbebyjyR8QQsAxW3PXnuBmH7dxFT4mQtFPZsUROSw2wZbhGrEk79Ss8gDTrtAHb4Zh0-aGAgIWc/pub?gid=0&single=true&output=csv';
+
+        function getDriveId(str) {
+            if (!str) return null;
+            const match = str.match(/[-\w]{25,}/);
+            return match ? match[0] : null;
+        }
+
+        function playGoat() {
+            const sound = document.getElementById('goat-sound');
+            sound.currentTime = 0;
+            const playPromise = sound.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Audio failed to play. Make sure you clicked the page once first!");
+                });
+            }
+        }
+
+        function initSite() {
+            const overlay = document.getElementById('intro-overlay');
+            const sound = document.getElementById('glitch-sound');
+            try { sound.play(); } catch(e) {}
+
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => { overlay.style.display = 'none'; }, 800);
+            }, 1500);
+            
+            loadLeaderboard();
+        }
+
+        async function loadLeaderboard() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const data = await response.text();
+                const rows = data.split('\n').slice(1);
+                
+                let participants = rows.map(row => {
+                    const columns = row.split(',');
+                    return {
+                        name: columns[0]?.trim() || "Unknown",
+                        score: parseFloat(columns[1]),
+                        imageId: getDriveId(columns[2])
+                    };
+                }).filter(p => !isNaN(p.score));
+
+                participants.sort((a, b) => a.score - b.score);
+
+                const body = document.getElementById('leaderboard-body');
+                body.innerHTML = '';
+
+                participants.forEach((p, index) => {
+                    const rank = index + 1;
+                    let rowClass = (rank === 1) ? 'rank-1' : (rank === 2) ? 'rank-2' : (rank === 3) ? 'rank-3' : '';
+                    
+                    const goatBtn = (rank <= 3) ? `<button class="goat-action-btn" onclick="playGoat()">GOAT</button>` : '';
+
+                    const imgUrl = p.imageId ? `https://drive.google.com/thumbnail?id=${p.imageId}&sz=s100` : 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
+
+                    body.innerHTML += `<tr class="${rowClass}">
+                        <td style="text-align:center; font-weight:bold;">#${rank}</td>
+                        <td>${goatBtn}<img src="${imgUrl}" class="participant-pic"> ${p.name}</td>
+                        <td style="text-align:right; padding-right:20px; font-family:'Orbitron'">${p.score.toFixed(2)}s</td>
+                    </tr>`;
+                });
+            } catch (e) { console.error("Sync Error", e); }
+        }
+
+        function filterTable() {
+            const input = document.getElementById('searchBar').value.toLowerCase();
+            const rows = document.getElementById('leaderboard-body').getElementsByTagName('tr');
+            for (let row of rows) {
+                const name = row.getElementsByTagName('td')[1].textContent.toLowerCase();
+                row.style.display = name.includes(input) ? '' : 'none';
+            }
+        }
+
+        window.onload = initSite;
+    </script>
+</body>
+</html>
