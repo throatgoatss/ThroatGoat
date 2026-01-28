@@ -14,6 +14,21 @@
             --platinum: #00f2ff;
             --bronze: #ff6600;
             --text: #e0e0e0;
+            --trend-up: #39ff14;
+            --trend-down: #ff003c;
+            --trend-new: #00f2ff;
+            
+            /* Rank Colors */
+            --rank-divine: #bf00ff;
+            --rank-phantom: #ffcc00;
+            --rank-astral: #00f2ff;
+            --rank-void: #0044ff;
+            --rank-glitch: #ff00ff;
+            --rank-lead: #ff6600;
+            --rank-unit: #39ff14;
+            --rank-recruit: #888888;
+            --rank-sip: #8b4513;
+            --rank-waster: #ff0000;
         }
 
         body { background-color: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; margin: 0; overflow-x: hidden; width: 100%; }
@@ -50,7 +65,7 @@
         /* 2. MENU - UPDATED FOR PC VISIBILITY */
         #menu-toggle {
             position: fixed;
-            top: 20px; right: 20px; z-index: 5000; /* Highest priority */
+            top: 20px; right: 20px; z-index: 5000;
             cursor: pointer; background: rgba(0,0,0,0.9);
             padding: 10px; border: 1px solid var(--neon-green); border-radius: 5px;
             display: block !important;
@@ -97,24 +112,28 @@
             z-index: 10;
         }
 
-        tr:active {
-            transform: scale(0.98);
-        }
+        tr:active { transform: scale(0.98); }
 
         td { padding: 15px 10px; font-size: 1.1rem; border: 1px solid transparent; }
+
+        /* TREND INDICATORS */
+        .trend-icon { font-size: 0.8rem; margin-left: 5px; font-weight: bold; }
+        .trend-up { color: var(--trend-up); text-shadow: 0 0 5px var(--trend-up); }
+        .trend-down { color: var(--trend-down); text-shadow: 0 0 5px var(--trend-down); }
+        .trend-new { color: var(--trend-new); text-shadow: 0 0 5px var(--trend-new); }
+
+        /* RANK TAGS */
+        .rank-tag { font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 900; display: block; margin-top: 2px; letter-spacing: 1px; }
 
         /* RANK GLOW EFFECTS */
         .rank-1 { border: 1px solid var(--gold) !important; box-shadow: 0 0 15px rgba(255, 204, 0, 0.2); }
         .rank-1 td { color: var(--gold); font-weight: bold; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
-        .rank-1:hover { box-shadow: 0 0 25px rgba(255, 204, 0, 0.4); }
         
         .rank-2 { border: 1px solid var(--platinum) !important; }
         .rank-2 td { color: var(--platinum); text-shadow: 0 0 8px rgba(0, 242, 255, 0.4); }
-        .rank-2:hover { box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); }
 
         .rank-3 { border: 1px solid var(--bronze) !important; }
         .rank-3 td { color: var(--bronze); text-shadow: 0 0 8px rgba(255, 102, 0, 0.4); }
-        .rank-3:hover { box-shadow: 0 0 20px rgba(255, 102, 0, 0.3); }
 
         .participant-pic { 
             width: 45px; height: 45px; border-radius: 50%; 
@@ -123,13 +142,6 @@
             transition: 0.3s;
         }
         tr:hover .participant-pic { border-color: var(--neon-green); transform: rotate(5deg); }
-        
-        .goat-action-btn {
-            background: var(--neon-green); color: black; border: none; padding: 4px 8px;
-            font-family: 'Orbitron'; font-size: 0.7rem; cursor: pointer; border-radius: 3px;
-            transition: 0.2s;
-        }
-        .goat-action-btn:hover { transform: scale(1.1); filter: brightness(1.2); }
 
         /* 5. HISTORY MODAL */
         #history-modal {
@@ -171,6 +183,8 @@
             <h2 style="color:var(--neon-green); font-family:'Orbitron'">NAVIGATION</h2>
             <ul style="list-style: none; padding: 0; line-height: 2.5;">
                 <li><a href="index.html" style="color:var(--neon-green); text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">🏆 LEADERBOARD</a></li>
+                <li><a href="rank.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">🎭 RANK TIERS</a></li>
+                <li><a href="timer.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">⏱️ TIMER</a></li>
                 <li><a href="rules.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">📜 RULES OF CLUB</a></li>
                 <li><a href="about.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">🛡️ ABOUT US</a></li>
             </ul>
@@ -228,6 +242,7 @@
         
         let fullHistoryData = {}; 
         let globalImageMap = {}; 
+        let lastAttemptMap = {};
 
         function toggleMenu() { document.getElementById('side-menu').classList.toggle('open'); }
         function closeModal() { document.getElementById('history-modal').style.display = 'none'; }
@@ -238,7 +253,7 @@
             const content = document.getElementById('history-content');
             title.innerText = playerName;
             content.innerHTML = '';
-            const scores = fullHistoryData[playerName].sort((a, b) => a - b);
+            const scores = fullHistoryData[playerName];
             scores.forEach((s, index) => {
                 content.innerHTML += `<div class="history-entry"><span>Attempt #${index + 1}</span><span style="color:var(--neon-green)">${s.toFixed(2)}s</span></div>`;
             });
@@ -251,10 +266,17 @@
             return match ? match[0] : null;
         }
 
-        function playGoat() {
-            const sound = document.getElementById('goat-sound');
-            sound.currentTime = 0;
-            sound.play().catch(() => {});
+        function getRank(time) {
+            if (time < 3.5) return { name: "DIVINE GOAT", color: "var(--rank-divine)" };
+            if (time < 4.5) return { name: "ANGLE GLUPPER", color: "var(--rank-phantom)" };
+            if (time < 5.5) return { name: "ELITE PHANTOM", color: "var(--rank-astral)" };
+            if (time < 6.5) return { name: "ASTRAL CHUGGER", color: "var(--rank-void)" };
+            if (time < 7.5) return { name: "VOID THROAT", color: "var(--rank-glitch)" };
+            if (time < 8.5) return { name: "GLITCH GULPER", color: "var(--rank-lead)" };
+            if (time < 10.0) return { name: "LEAD PIPE", color: "var(--rank-unit)" };
+            if (time < 12.0) return { name: "HYDRATION UNIT", color: "var(--rank-recruit)" };
+            if (time < 15.0) return { name: "SIPLORD", color: "var(--rank-sip)" };
+            return { name: "WATER WASTER", color: "var(--rank-waster)" };
         }
 
         async function loadLeaderboard() {
@@ -266,6 +288,7 @@
                 let pBestMap = {};
                 let totalAttempts = 0;
                 fullHistoryData = {};
+                lastAttemptMap = {};
 
                 rows.forEach(row => {
                     const cols = row.split(',');
@@ -278,6 +301,7 @@
                         if (currentImgId) globalImageMap[name] = currentImgId;
                         if (!fullHistoryData[name]) fullHistoryData[name] = [];
                         fullHistoryData[name].push(score);
+                        lastAttemptMap[name] = score; 
                         if (!pBestMap[name] || score < pBestMap[name].score) {
                             pBestMap[name] = { name, score };
                         }
@@ -290,17 +314,24 @@
                 body.innerHTML = '';
 
                 sorted.forEach((p, i) => {
-                    const rank = i + 1;
-                    const rowClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
+                    const rankNum = i + 1;
+                    const rowClass = rankNum === 1 ? 'rank-1' : rankNum === 2 ? 'rank-2' : rankNum === 3 ? 'rank-3' : '';
                     const finalImgId = globalImageMap[p.name];
                     const imgUrl = finalImgId ? `https://drive.google.com/thumbnail?id=${finalImgId}&sz=s100` : 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
-                    const btn = rank <= 3 ? `<button class="goat-action-btn" onclick="event.stopPropagation(); playGoat()">GOAT</button> ` : '';
+                    
+                    const rankInfo = getRank(p.score);
+                    const attempts = fullHistoryData[p.name];
+                    const latest = lastAttemptMap[p.name];
+                    const best = p.score;
+                    
+                    let trendHtml = attempts.length > 1 ? (latest <= best ? '<span class="trend-icon trend-up">▲</span>' : '<span class="trend-icon trend-down">▼</span>') : '<span class="trend-icon trend-new">◀▶</span>';
 
                     body.innerHTML += `<tr class="${rowClass}" onclick="openHistory('${p.name.replace(/'/g, "\\'")}')">
-                        <td style="text-align:center; font-weight:bold;">#${rank}</td>
+                        <td style="text-align:center; font-weight:bold;">#${rankNum}</td>
                         <td>
-                            ${btn}<img src="${imgUrl}" class="participant-pic"> 
-                            <span class="clickable-name">${p.name}</span>
+                            <img src="${imgUrl}" class="participant-pic"> 
+                            <span class="clickable-name">${p.name}</span>${trendHtml}
+                            <span class="rank-tag" style="color:${rankInfo.color}">${rankInfo.name}</span>
                         </td>
                         <td style="text-align:right; padding-right:20px; font-family:'Orbitron'">${p.score.toFixed(2)}s</td>
                     </tr>`;
