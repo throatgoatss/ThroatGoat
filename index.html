@@ -18,7 +18,7 @@
 
         body { background-color: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; margin: 0; overflow-x: hidden; width: 100%; }
 
-        /* 1. INTRO */
+        /* 1. INTRO & EFFECTS */
         #intro-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -42,150 +42,134 @@
         }
 
         @keyframes glitch {
-            0% { transform: translate(2px, -2px); text-shadow: 2px 0 0 red, -2px -2px 0 green, 0 2px 0 blue; }
-            50% { transform: translate(-2px, 2px); text-shadow: -2px 0 0 red, 2px 2px 0 green, -2px -2px 0 blue; }
-            100% { transform: translate(1px, -1px); text-shadow: 2px 2px 0 red, -2px 2px 0 green, 2px -2px 0 blue; }
+            0% { transform: translate(2px, -2px); }
+            50% { transform: translate(-2px, 2px); }
+            100% { transform: translate(1px, -1px); }
         }
 
-        /* 2. HAMBURGER MENU */
+        /* 2. MENU */
         #menu-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            cursor: pointer;
-            background: rgba(0,0,0,0.8);
-            padding: 10px;
-            border: 1px solid var(--neon-green);
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+            top: 20px; right: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(0,0,0,0.8);
+            padding: 10px; border: 1px solid var(--neon-green); border-radius: 5px;
         }
-
-        .bar { width: 25px; height: 3px; background-color: var(--neon-green); margin: 4px 0; transition: 0.4s; }
+        .bar { width: 25px; height: 3px; background-color: var(--neon-green); margin: 4px 0; }
 
         #side-menu {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            right: 0;
-            background-color: rgba(5, 5, 5, 0.98);
-            overflow-x: hidden;
-            transition: 0.5s ease-in-out;
-            border-left: 0px solid var(--neon-green);
+            height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; right: 0;
+            background-color: rgba(5, 5, 5, 0.98); overflow-x: hidden; transition: 0.5s;
         }
-
         #side-menu.open { width: 320px; border-left: 3px solid var(--neon-green); }
-
-        .menu-content { padding: 80px 25px; font-family: 'Rajdhani'; }
-        .menu-content h2 { 
-            color: var(--neon-green); 
-            font-family: 'Orbitron'; 
-            font-size: 1.2rem; 
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            font-size: 30px;
-            color: var(--neon-green);
-            cursor: pointer;
-        }
+        .menu-content { padding: 80px 25px; }
+        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 30px; color: var(--neon-green); cursor: pointer; }
 
         /* 3. MAIN LAYOUT */
         header { padding: 40px 15px; text-align: center; }
         .main-title { font-family: 'Orbitron'; font-size: 2.2rem; color: white; letter-spacing: 4px; text-shadow: 0 0 15px var(--neon-green); }
 
         .gdrive-btn {
-            display: inline-block;
-            background: transparent;
-            color: var(--neon-green);
-            border: 2px solid var(--neon-green);
-            padding: 12px 25px;
-            text-decoration: none;
-            font-family: 'Orbitron';
-            font-size: 0.85rem;
-            margin-bottom: 30px;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            display: inline-block; background: transparent; color: var(--neon-green);
+            border: 2px solid var(--neon-green); padding: 12px 25px; text-decoration: none;
+            font-family: 'Orbitron'; margin-bottom: 30px; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
             transition: 0.3s;
         }
+        .gdrive-btn:hover { background: var(--neon-green); color: black; box-shadow: 0 0 20px var(--neon-green); }
 
-        /* 4. LEADERBOARD */
+        /* 4. LEADERBOARD INTERACTIVITY */
         .search-box { margin-bottom: 25px; text-align: center; }
-        #searchBar { background: #1a1a1a; border: 1px solid #333; padding: 14px; color: white; width: 85%; max-width: 320px; outline: none; border-radius: 4px; font-family: 'Rajdhani'; }
+        #searchBar { background: #1a1a1a; border: 1px solid #333; padding: 14px; color: white; width: 85%; max-width: 320px; border-radius: 4px; outline: none; transition: 0.3s; }
+        #searchBar:focus { border-color: var(--neon-green); box-shadow: 0 0 10px rgba(57, 255, 20, 0.2); }
 
-        .leaderboard-table { width: 95%; margin: 0 auto; border-collapse: separate; border-spacing: 0 10px; }
-        th { font-size: 0.8rem; color: #666; text-transform: uppercase; padding: 10px; text-align: left; }
-        tr { background: var(--card-bg); transition: 0.3s; }
-        td { padding: 15px 10px; font-size: 1.1rem; }
-
-        #leaderboard-body tr:hover {
-            background: #1a1a1a !important;
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
-            cursor: crosshair;
-        }
-
-        .goat-action-btn {
-            background: var(--neon-green);
-            color: black;
-            border: none;
-            padding: 4px 8px;
-            font-family: 'Orbitron';
-            font-size: 0.7rem;
-            font-weight: 900;
+        .leaderboard-table { width: 95%; margin: 0 auto; border-collapse: separate; border-spacing: 0 12px; }
+        
+        /* THE ZOOM EFFECT */
+        tr { 
+            background: var(--card-bg); 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, background 0.3s;
             cursor: pointer;
-            margin-right: 10px;
-            border-radius: 3px;
-            vertical-align: middle;
-            box-shadow: 0 0 8px var(--neon-green);
+        }
+        
+        tr:hover { 
+            transform: scale(1.03); 
+            background: #1a1a1a;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            z-index: 10;
         }
 
-        /* Ranks */
-        .rank-1 { border: 1px solid var(--gold); animation: goldPulse 2s infinite; }
-        .rank-1 td { color: var(--gold); font-weight: bold; }
-        .rank-2 { border: 1px solid var(--platinum); }
-        .rank-2 td { color: var(--platinum); }
-        .rank-3 { border: 1px solid var(--bronze); }
-        .rank-3 td { color: var(--bronze); }
-
-        @keyframes goldPulse {
-            0%, 100% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.5); }
+        tr:active {
+            transform: scale(0.98);
         }
 
-        .participant-pic { width: 45px; height: 45px; border-radius: 50%; margin-right: 12px; vertical-align: middle; border: 2px solid #333; object-fit: cover; }
+        td { padding: 15px 10px; font-size: 1.1rem; border: 1px solid transparent; }
 
-        footer { margin-top: 60px; padding: 40px 15px; background: #000; font-size: 0.9rem; color: #555; text-align: center; line-height: 1.8; }
+        /* RANK GLOW EFFECTS */
+        .rank-1 { border: 1px solid var(--gold) !important; box-shadow: 0 0 15px rgba(255, 204, 0, 0.2); }
+        .rank-1 td { color: var(--gold); font-weight: bold; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
+        .rank-1:hover { box-shadow: 0 0 25px rgba(255, 204, 0, 0.4); }
+        
+        .rank-2 { border: 1px solid var(--platinum) !important; }
+        .rank-2 td { color: var(--platinum); text-shadow: 0 0 8px rgba(0, 242, 255, 0.4); }
+        .rank-2:hover { box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); }
+
+        .rank-3 { border: 1px solid var(--bronze) !important; }
+        .rank-3 td { color: var(--bronze); text-shadow: 0 0 8px rgba(255, 102, 0, 0.4); }
+        .rank-3:hover { box-shadow: 0 0 20px rgba(255, 102, 0, 0.3); }
+
+        .participant-pic { 
+            width: 45px; height: 45px; border-radius: 50%; 
+            margin-right: 12px; vertical-align: middle; 
+            border: 2px solid #333; object-fit: cover;
+            transition: 0.3s;
+        }
+        tr:hover .participant-pic { border-color: var(--neon-green); transform: rotate(5deg); }
+        
+        .goat-action-btn {
+            background: var(--neon-green); color: black; border: none; padding: 4px 8px;
+            font-family: 'Orbitron'; font-size: 0.7rem; cursor: pointer; border-radius: 3px;
+            transition: 0.2s;
+        }
+        .goat-action-btn:hover { transform: scale(1.1); filter: brightness(1.2); }
+
+        /* 5. HISTORY MODAL */
+        #history-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center;
+        }
+        .modal-box {
+            background: #111; border: 2px solid var(--neon-green); padding: 25px;
+            width: 85%; max-width: 400px; border-radius: 10px; text-align: center;
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+        .history-list { margin: 20px 0; max-height: 250px; overflow-y: auto; text-align: left; }
+        .history-entry { padding: 10px; border-bottom: 1px solid #222; font-family: 'Orbitron'; color: var(--platinum); display: flex; justify-content: space-between; }
+        .close-modal-btn { background: var(--neon-green); color: black; border: none; padding: 10px 20px; font-family: 'Orbitron'; cursor: pointer; width: 100%; }
+        
+        .clickable-name { cursor: pointer; text-decoration: underline; text-decoration-color: #444; transition: 0.2s; }
+        .clickable-name:hover { color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); }
+
+        footer { margin-top: 60px; padding: 40px 15px; background: #000; font-size: 0.9rem; color: #555; text-align: center; }
         .founder-name { color: var(--neon-green); font-weight: bold; }
-        .email { color: var(--platinum); text-decoration: none; }
+        .Contact { color: var(--neon-green); font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <audio id="glitch-sound" src="https://limewire.com/d/ZlWTL#J8K55HfXdF" preload="auto"></audio>
     <audio id="goat-sound" src="https://docs.google.com/uc?export=download&id=1tnolLZ5oyo77awgDkrRQr3QBJ25g85mJ" preload="auto"></audio>
 
     <div id="intro-overlay">
-        <div class="glitch" id="glitch-text">THROATGOAT</div>
+        <div class="glitch">THROATGOAT</div>
     </div>
 
     <div id="menu-toggle" onclick="toggleMenu()">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
     </div>
 
     <div id="side-menu">
         <div class="close-btn" onclick="toggleMenu()">&times;</div>
         <div class="menu-content">
-            <h2>Rules of the ThroatClub</h2>
-            <ul style="list-style: none; padding: 0; line-height: 1.8; font-size: 1rem;">
+            <h2 style="color:var(--neon-green); font-family:'Orbitron'">Rules of the ThroatClub</h2>
+            <ul style="list-style: none; padding: 0; line-height: 1.8;">
                 <li style="margin-bottom:15px;">⚡ <strong style="color:var(--neon-green)">GOAL:</strong> Drink 500ml water without stopping.</li>
                 <li>⚡ <strong>1:</strong> You Do Not Talk About Throat Club.</li>
                 <li>⚡ <strong>2:</strong> You DO NOT TALK ABOUT THROAT CLUB.</li>
@@ -199,9 +183,17 @@
         </div>
     </div>
 
+    <div id="history-modal">
+        <div class="modal-box">
+            <h2 id="modal-player-name" style="font-family:'Orbitron'; color:var(--neon-green); margin:0;">NAME</h2>
+            <div id="history-content" class="history-list"></div>
+            <button class="close-modal-btn" onclick="closeModal()">CLOSE</button>
+        </div>
+    </div>
+
     <header>
         <h1 class="main-title">THROATGOAT</h1>
-        <div id="stats-bar" style="text-align:center; font-family:'Orbitron'; color:var(--platinum); margin-top:10px; font-size:0.9rem; letter-spacing:1px;">
+        <div style="text-align:center; font-family:'Orbitron'; color:var(--platinum); margin-top:10px; font-size:0.9rem;">
             TOTAL WATER ANNIHILATED: <span id="total-volume" style="color:var(--neon-green)">0</span>ML
         </div>
     </header>
@@ -221,30 +213,46 @@
         <table class="leaderboard-table">
             <thead>
                 <tr>
-                    <th style="width: 20%; text-align: center;">Tier</th>
-                    <th style="width: 50%;">ThroatGoat's</th>
-                    <th style="width: 30%; text-align: right; padding-right: 20px;">Time</th>
+                    <th style="width: 20%; text-align: center; color:#666;">Tier</th>
+                    <th style="width: 50%; color:#666; text-align:left;">ThroatGoat's</th>
+                    <th style="width: 30%; text-align: right; padding-right: 20px; color:#666;">Time</th>
                 </tr>
             </thead>
-            <tbody id="leaderboard-body"></tbody>
+            <tbody id="leaderboard-body">
+                <tr><td colspan="3" style="text-align:center">Loading Data...</td></tr>
+            </tbody>
         </table>
     </div>
 
     <footer>
         Founders: <span class="founder-name">SAHIL K.</span> & <span class="founder-name">SMAYAN B.</span><br>
-        Contact: <a href="mailto:throatgoatcompetition@gmail.com" class="email">throatgoatcompetition@gmail.com</a>
+        Contact: <span class="Contact">throatgoatcompetition@gmail.com</span>
     </footer>
 
     <script>
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS9FTbebyjyR8QQsAxW3PXnuBmH7dxFT4mQtFPZsUROSw2wZbhGrEk79Ss8gDTrtAHb4Zh0-aGAgIWc/pub?gid=0&single=true&output=csv';
+        const FINAL_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vS9FTbebyjyR8QQsAxW3PXnuBmH7dxFT4mQtFPZsUROSw2wZbhGrEk79Ss8gDTrtAHb4Zh0-aGAgIWc/pub?gid=0&single=true&output=csv`;
+        
+        let fullHistoryData = {}; 
+        let globalImageMap = {}; 
 
-        function toggleMenu() {
-            const menu = document.getElementById('side-menu');
-            menu.classList.toggle('open');
+        function toggleMenu() { document.getElementById('side-menu').classList.toggle('open'); }
+        function closeModal() { document.getElementById('history-modal').style.display = 'none'; }
+
+        function openHistory(playerName) {
+            const modal = document.getElementById('history-modal');
+            const title = document.getElementById('modal-player-name');
+            const content = document.getElementById('history-content');
+            title.innerText = playerName;
+            content.innerHTML = '';
+            const scores = fullHistoryData[playerName].sort((a, b) => a - b);
+            scores.forEach((s, index) => {
+                content.innerHTML += `<div class="history-entry"><span>Attempt #${index + 1}</span><span style="color:var(--neon-green)">${s.toFixed(2)}s</span></div>`;
+            });
+            modal.style.display = 'flex';
         }
 
         function getDriveId(str) {
-            if (!str) return null;
+            if (!str || str.trim() === "") return null;
             const match = str.match(/[-\w]{25,}/);
             return match ? match[0] : null;
         }
@@ -252,85 +260,75 @@
         function playGoat() {
             const sound = document.getElementById('goat-sound');
             sound.currentTime = 0;
-            const playPromise = sound.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => console.log("Audio failed. Click page first!"));
-            }
-        }
-
-        function initSite() {
-            const overlay = document.getElementById('intro-overlay');
-            const sound = document.getElementById('glitch-sound');
-            try { sound.play(); } catch(e) {}
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                setTimeout(() => { overlay.style.display = 'none'; }, 800);
-            }, 1500);
-            loadLeaderboard();
+            sound.play().catch(() => {});
         }
 
         async function loadLeaderboard() {
             try {
-                const response = await fetch(SHEET_URL);
-                const data = await response.text();
-                const rows = data.split('\n').slice(1);
-                
-                let participants = rows.map(row => {
-                    const columns = row.split(',');
-                    return {
-                        name: columns[0]?.trim() || "Unknown",
-                        score: parseFloat(columns[1]),
-                        imageId: getDriveId(columns[2])
-                    };
-                }).filter(p => !isNaN(p.score));
+                const response = await fetch(FINAL_URL + '&cb=' + Date.now());
+                const csvData = await response.text();
+                const rows = csvData.split('\n').filter(r => r.trim() !== "").slice(1);
 
-                participants.sort((a, b) => a.score - b.score);
+                let pBestMap = {};
+                let totalAttempts = 0;
+                fullHistoryData = {};
 
-                const totalVolume = participants.length * 500;
-                const volumeDisplay = document.getElementById('total-volume');
-                let start = 0;
-                const duration = 2000;
-                const increment = totalVolume / (duration / 16);
+                rows.forEach(row => {
+                    const cols = row.split(',');
+                    const name = cols[0]?.trim();
+                    const score = parseFloat(cols[1]);
+                    const currentImgId = getDriveId(cols[2]);
 
-                const updateCounter = () => {
-                    start += increment;
-                    if (start < totalVolume) {
-                        volumeDisplay.innerText = Math.floor(start).toLocaleString();
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        volumeDisplay.innerText = totalVolume.toLocaleString();
+                    if (name && !isNaN(score)) {
+                        totalAttempts++;
+                        if (currentImgId) globalImageMap[name] = currentImgId;
+                        if (!fullHistoryData[name]) fullHistoryData[name] = [];
+                        fullHistoryData[name].push(score);
+                        if (!pBestMap[name] || score < pBestMap[name].score) {
+                            pBestMap[name] = { name, score };
+                        }
                     }
-                };
-                updateCounter();
+                });
 
+                document.getElementById('total-volume').innerText = (totalAttempts * 500).toLocaleString();
+                let sorted = Object.values(pBestMap).sort((a, b) => a.score - b.score);
                 const body = document.getElementById('leaderboard-body');
                 body.innerHTML = '';
 
-                participants.forEach((p, index) => {
-                    const rank = index + 1;
-                    let rowClass = (rank === 1) ? 'rank-1' : (rank === 2) ? 'rank-2' : (rank === 3) ? 'rank-3' : '';
-                    const goatBtn = (rank <= 3) ? `<button class="goat-action-btn" onclick="playGoat()">GOAT</button>` : '';
-                    const imgUrl = p.imageId ? `https://drive.google.com/thumbnail?id=${p.imageId}&sz=s100` : 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
+                sorted.forEach((p, i) => {
+                    const rank = i + 1;
+                    const rowClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
+                    const finalImgId = globalImageMap[p.name];
+                    const imgUrl = finalImgId ? `https://drive.google.com/thumbnail?id=${finalImgId}&sz=s100` : 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
+                    const btn = rank <= 3 ? `<button class="goat-action-btn" onclick="event.stopPropagation(); playGoat()">GOAT</button> ` : '';
 
-                    body.innerHTML += `<tr class="${rowClass}">
+                    body.innerHTML += `<tr class="${rowClass}" onclick="openHistory('${p.name.replace(/'/g, "\\'")}')">
                         <td style="text-align:center; font-weight:bold;">#${rank}</td>
-                        <td>${goatBtn}<img src="${imgUrl}" class="participant-pic" loading="lazy"> ${p.name}</td>
+                        <td>
+                            ${btn}<img src="${imgUrl}" class="participant-pic"> 
+                            <span class="clickable-name">${p.name}</span>
+                        </td>
                         <td style="text-align:right; padding-right:20px; font-family:'Orbitron'">${p.score.toFixed(2)}s</td>
                     </tr>`;
                 });
-            } catch (e) { console.error("Sync Error", e); }
+            } catch (err) { console.error(err); }
         }
 
         function filterTable() {
             const input = document.getElementById('searchBar').value.toLowerCase();
             const rows = document.getElementById('leaderboard-body').getElementsByTagName('tr');
             for (let row of rows) {
-                const name = row.getElementsByTagName('td')[1].textContent.toLowerCase();
-                row.style.display = name.includes(input) ? '' : 'none';
+                row.style.display = row.innerText.toLowerCase().includes(input) ? '' : 'none';
             }
         }
 
-        window.onload = initSite;
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('intro-overlay').style.opacity = '0';
+                setTimeout(() => document.getElementById('intro-overlay').style.display = 'none', 800);
+            }, 1000);
+            loadLeaderboard();
+        };
     </script>
 </body>
 </html>
