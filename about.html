@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ABOUT US | THROATGOAT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: #111;
+            --neon-green: #39ff14;
+            --gold: #ffcc00;
+            --platinum: #00f2ff;
+            --bronze: #ff6600;
+            --text: #e0e0e0;
+        }
+
+        body { background-color: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; margin: 0; overflow-x: hidden; width: 100%; }
+
+        /* 1. INTRO & EFFECTS */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: 0.8s ease-out;
+        }
+
+        .glitch {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            text-shadow: 2px 0 0 red, -2px -2px 0 green, 0 2px 0 blue;
+            animation: glitch 200ms infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(2px, -2px); }
+            50% { transform: translate(-2px, 2px); }
+            100% { transform: translate(1px, -1px); }
+        }
+
+        /* 2. MENU */
+        #menu-toggle {
+            position: fixed;
+            top: 20px; right: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(0,0,0,0.8);
+            padding: 10px; border: 1px solid var(--neon-green); border-radius: 5px;
+        }
+        .bar { width: 25px; height: 3px; background-color: var(--neon-green); margin: 4px 0; }
+
+        #side-menu {
+            height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; right: 0;
+            background-color: rgba(5, 5, 5, 0.98); overflow-x: hidden; transition: 0.5s;
+        }
+        #side-menu.open { width: 320px; border-left: 3px solid var(--neon-green); }
+        .menu-content { padding: 80px 25px; }
+        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 30px; color: var(--neon-green); cursor: pointer; }
+
+        /* 3. MAIN LAYOUT */
+        header { padding: 40px 15px; text-align: center; }
+        .main-title { font-family: 'Orbitron'; font-size: 2.2rem; color: white; letter-spacing: 4px; text-shadow: 0 0 15px var(--neon-green); }
+
+        .content-wrapper { width: 95%; max-width: 900px; margin: 0 auto; text-align: center; }
+        
+        .intro-text {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #222;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* FOUNDERS GRID */
+        .founders-grid {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .founder-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            width: 40%;
+            min-width: 280px;
+            transition: 0.3s;
+        }
+        .founder-card:hover {
+            border-color: var(--neon-green);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(57, 255, 20, 0.2);
+        }
+
+        /* RECTANGULAR AND LARGE */
+        .founder-pic {
+            width: 220px; 
+            height: 250px; 
+            border-radius: 8px; /* Square/Rectangular */
+            object-fit: cover;
+            border: 3px solid var(--neon-green);
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .founder-name-tag {
+            font-family: 'Orbitron';
+            color: var(--neon-green);
+            font-size: 1.1rem;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+
+        .founder-quote {
+            font-style: italic;
+            color: var(--platinum);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            min-height: 40px;
+        }
+
+        footer { margin-top: 60px; padding: 40px 15px; background: #000; font-size: 0.9rem; color: #555; text-align: center; }
+        .founder-name-footer { color: var(--neon-green); font-weight: bold; }
+        .Contact { color: var(--neon-green); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <div class="glitch">ABOUT US</div>
+    </div>
+
+    <div id="menu-toggle" onclick="toggleMenu()">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </div>
+
+    <div id="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <div class="menu-content">
+            <h2 style="color:var(--neon-green); font-family:'Orbitron'">NAVIGATION</h2>
+            <ul style="list-style: none; padding: 0; line-height: 2.5;">
+                <li><a href="index.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">🏆 LEADERBOARD</a></li>
+                <li><a href="rules.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">📜 RULES OF CLUB</a></li>
+                <li><a href="about.html" style="color:var(--neon-green); text-decoration:none; font-family:'Orbitron'; font-size: 1.2rem;">🛡️ ABOUT US</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <header>
+        <h1 class="main-title">THE FOUNDATION</h1>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="intro-text">
+            ThroatGoat isn't just a competition; it's a test of raw physical limit and hydration efficiency. Born in the shadows of the gauntlet, we seek those who possess the legendary ability to annihilate liquid in record-breaking time.
+        </div>
+
+        <div class="founders-grid">
+            <div class="founder-card">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1HQ57GQtluENbwL_EJV4wyg_K6Kz9ofXh" class="founder-pic" alt="Smayan Balan">
+                <div class="founder-name-tag">SMAYAN BALAN</div>
+                <div class="founder-quote">"My throat is the throat that swallows the heavens"</div>
+            </div>
+
+            <div class="founder-card">
+                <img src="https://lh3.googleusercontent.com/u/0/d/16l3CRkQk2DK51fdLgzlGLTwTM6vK9YDD" class="founder-pic" alt="Sahil Khandekar">
+                <div class="founder-name-tag">SAHIL KHANDEKAR</div>
+                <div class="founder-quote">"When you give up, That's when the Throat Game ends."</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Founders: <span class="founder-name-footer">SAHIL K.</span> & <span class="founder-name-footer">SMAYAN B.</span><br>
+        Contact: <span class="Contact">throatgoatcompetition@gmail.com</span>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('side-menu').classList.toggle('open'); }
+
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('intro-overlay').style.opacity = '0';
+                setTimeout(() => document.getElementById('intro-overlay').style.display = 'none', 800);
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
